@@ -46,9 +46,9 @@ var renderJSX = function renderJSX() {
             app.options.length > 0 ? 'Here are your options' : 'No options'
         ),
         React.createElement(
-            "p",
+            "button",
             null,
-            app.options.length
+            "What should I do?"
         ),
         React.createElement(
             "button",
