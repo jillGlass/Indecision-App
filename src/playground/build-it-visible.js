@@ -24,7 +24,6 @@ const renderVisibilityApp = () => {
                     </div>
             )}
             
-            
         </div>
     );
     
