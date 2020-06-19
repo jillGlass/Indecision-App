@@ -98,21 +98,29 @@ class AddOption extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.state = {
+        error: undefined
+    }
   }
   handleAddOption(e) {
     e.preventDefault();
     // option = where the event took place, ie the form where text was entered
     const option = e.target.elements.option.value.trim();
-    const optionList = [];
-
-    if (option) {
-      this.props.handleAddOption(option);
-      e.target.elements.option.value = '';
-    }
+    const error = this.props.handleAddOption(option);
+    e.target.elements.option.value = '';
+    this.setState(() => {
+        return{
+            error
+        }
+    })
   }
+  
+
+  
   render() {
     return (
       <div>
+          {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.handleAddOption}>
           <input type="text" name="option" />
           <button>Add Option</button>

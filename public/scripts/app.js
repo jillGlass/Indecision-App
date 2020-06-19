@@ -179,6 +179,9 @@ var AddOption = function (_React$Component5) {
     var _this5 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
 
     _this5.handleAddOption = _this5.handleAddOption.bind(_this5);
+    _this5.state = {
+      error: undefined
+    };
     return _this5;
   }
 
@@ -188,12 +191,13 @@ var AddOption = function (_React$Component5) {
       e.preventDefault();
       // option = where the event took place, ie the form where text was entered
       var option = e.target.elements.option.value.trim();
-      var optionList = [];
-
-      if (option) {
-        this.props.handleAddOption(option);
-        e.target.elements.option.value = '';
-      }
+      var error = this.props.handleAddOption(option);
+      e.target.elements.option.value = '';
+      this.setState(function () {
+        return {
+          error: error
+        };
+      });
     }
   }, {
     key: "render",
@@ -201,6 +205,11 @@ var AddOption = function (_React$Component5) {
       return React.createElement(
         "div",
         null,
+        this.state.error && React.createElement(
+          "p",
+          null,
+          this.state.error
+        ),
         React.createElement(
           "form",
           { onSubmit: this.handleAddOption },
