@@ -22,7 +22,14 @@ if(option){
 const removeAll =() => {
     app.options = [];
     renderJSX()
-}
+};
+
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum]
+    alert(option)
+    console.log(randomNum)
+};
 
 
 const renderJSX = () => {
@@ -31,7 +38,7 @@ const renderJSX = () => {
           <h1>{app.title}</h1>
           {app.subTitle && <p>{app.subTitle}</p>}
       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <button>What should I do?</button>
+      <button disabled={app.options.length === 0}onClick={onMakeDecision}>What should I do?</button>
       <button onClick = {removeAll}>Remove All</button>
       <ol>
       {
