@@ -18,8 +18,9 @@ var IndecisionApp = function (_React$Component) {
 
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
     _this.handlePickOptions = _this.handlePickOptions.bind(_this);
+    _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
-      options: ["thing one", "thing two", "thing three"]
+      options: []
     };
     return _this;
   }
@@ -41,6 +42,21 @@ var IndecisionApp = function (_React$Component) {
       alert(option);
     }
   }, {
+    key: "handleAddOption",
+    value: function handleAddOption(option) {
+      if (!option) {
+        return "Enter valid value to add item";
+      } else if (this.state.options.indexOf(option) > -1) {
+        return "This option already exits";
+      }
+
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.concat([option])
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var title = "Indecision";
@@ -56,8 +72,9 @@ var IndecisionApp = function (_React$Component) {
         }),
         React.createElement(Options, {
           options: this.state.options,
-          handleDeleteOptions: this.handleDeleteOptions }),
-        React.createElement(AddOption, null)
+          handleDeleteOptions: this.handleDeleteOptions
+        }),
+        React.createElement(AddOption, { handleAddOption: this.handleAddOption })
       );
     }
   }]);
@@ -113,7 +130,8 @@ var Action = function (_React$Component3) {
         "button",
         {
           disabled: !this.props.hasOptions,
-          onClick: this.props.handlePickOptions },
+          onClick: this.props.handlePickOptions
+        },
         "What should I do?"
       );
     }
@@ -155,10 +173,13 @@ var Options = function (_React$Component4) {
 var AddOption = function (_React$Component5) {
   _inherits(AddOption, _React$Component5);
 
-  function AddOption() {
+  function AddOption(props) {
     _classCallCheck(this, AddOption);
 
-    return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+    var _this5 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+    _this5.handleAddOption = _this5.handleAddOption.bind(_this5);
+    return _this5;
   }
 
   _createClass(AddOption, [{
@@ -170,9 +191,8 @@ var AddOption = function (_React$Component5) {
       var optionList = [];
 
       if (option) {
-        // optionList.push(option);
-        // e.target.elements.option.value = '';
-        alert(option);
+        this.props.handleAddOption(option);
+        e.target.elements.option.value = '';
       }
     }
   }, {
