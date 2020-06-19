@@ -1,43 +1,57 @@
 console.log("app.js is running");
 
-var app = {
+const app = {
   title: "Indecision App",
   subTitle: "Put your life in the hands of a computer",
-  options: ['One', 'Two']
+  options: []
 };
 
-var template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subTitle && <p>{app.subTitle}</p>}
-<p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-    <ol>
-        <li>Item one</li>
-        <li>Item two</li>
-    </ol>
-  </div>
-);
+const appRoot = document.getElementById("app");
 
-var user = {
-  name: "Jill",
-  age: 39,
-  location: "Auckland",
-};
+const onFormSubmit = (e) => {
+e.preventDefault()
+// option = where the event took place, ie the form where text was entered
+const option = e.target.elements.option.value;
 
-function getLocation(location) {
-    if(location){
-        return <p>Location: {location}</p> ;
-    } 
+if(option){
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderJSX();
+}
+}
+const removeAll =() => {
+    app.options = [];
+    renderJSX()
 }
 
-var templateTwo = (
-  <div>
-    <h1>{user.name ? user.name :'Anonymous'}</h1>
-    {(user.age && user.age >=18) && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
-  </div>
-);
 
-var appRoot = document.getElementById("app");
+const renderJSX = () => {
+   const template = (
+        <div>
+          <h1>{app.title}</h1>
+          {app.subTitle && <p>{app.subTitle}</p>}
+      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+      <p>{app.options.length}</p>
+      <button onClick = {removeAll}>Remove All</button>
+      <ol>
+      {
+          app.options.map(opt => {
+              return <li key={opt}>{opt}</li>
+          })
+          
+      }
+          
+              
+          </ol>
+          <form onSubmit={onFormSubmit}>
+              <input type='text' name='option'/>
+              <button>Add Option</button>
+          </form>
+        </div>
+    );
+    ReactDOM.render(template, appRoot)
+}
 
-ReactDOM.render(template, appRoot);
+renderJSX();
+
+
