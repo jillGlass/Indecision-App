@@ -36,7 +36,7 @@ class IndecisionApp extends React.Component {
   }
 
   render() {
-    const title = "Indecision";
+    const title = "Indecision App";
     const subTitle = "Put your life in the hands of your computer";
 
     return (
