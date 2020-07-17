@@ -29,9 +29,7 @@ var IndecisionApp = function (_React$Component) {
     key: "handleDeleteOptions",
     value: function handleDeleteOptions() {
       this.setState(function () {
-        return {
-          options: []
-        };
+        return { options: [] };
       });
     }
   }, {
@@ -59,7 +57,7 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var title = "Indecision";
+      var title = "Indecision App";
       var subTitle = "Put your life in the hands of your computer";
 
       return React.createElement(

@@ -1,3 +1,5 @@
+
+
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
@@ -9,12 +11,9 @@ class IndecisionApp extends React.Component {
     };
   }
   handleDeleteOptions() {
-    this.setState(() => {
-      return {
-        options: [],
-      };
-    });
+    this.setState(() => ({options: []}));
   }
+
   handlePickOptions() {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
